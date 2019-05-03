@@ -5,20 +5,38 @@ class GalleryList extends Component {
 
 
     render() {
-        let imageToRender = this.props.galleryList.map((image) => {
-            return (
-                <img key={image.id} alt={image.alt} src={image.path} />
-            )
+        let galleryItem;
+        
+        // this.props.galleryList.map((image) => {
+        //     console.log(image);
+        //     galleryItem = image;
             
-        })
-
+        //     return (
+        //         // <img key={image.id} alt={image.alt} src={image.path} />
+        //         image
+        //     )
+            
+            
+            
+        // })
+        console.log(galleryItem);
+        
         
         return(
+            <li>
+                {this.props.galleryList.map((image) => {
+                console.log(image);
+                    return (
+                        <GalleryItem key={image.id} galleryItem={image}/>
+                    )
+                    })}
+                
+            </li>
             // <p>images here</p>
-            <>
-            <li>{imageToRender}</li>
-            <GalleryItem />
-            </>
+            // <>
+            // {/* <li>{imageToRender}</li> */}
+            // <GalleryItem galleryItem={galleryItem}/>
+            // </>
         )
         // return(
         //     <li><img src=</li>

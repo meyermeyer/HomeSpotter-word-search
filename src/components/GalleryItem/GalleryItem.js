@@ -4,18 +4,18 @@ class GalleryItem extends Component {
 
 
     render() {
-        let imageToRender = this.props.galleryList.map((image) => {
-            return (
-                <img key={image.id} alt={image.alt} src={image.path} />
-            )
-
-        })
+        let imageToRender = 
+        <img alt={this.props.galleryItem.alt} src={this.props.galleryItem.path} />
+        console.log(this.props.galleryItem.alt);
+        
 
 
         return (
+        
+        
             // <p>images here</p>
             <>
-                <li>{imageToRender}</li>
+            {imageToRender}
             </>
         )
         // return(
