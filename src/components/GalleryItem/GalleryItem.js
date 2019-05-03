@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import GalleryItem from '../GalleryItem/GalleryItem';
+import React, { Component } from 'react';
 
-class GalleryList extends Component {
+class GalleryItem extends Component {
 
 
     render() {
@@ -9,15 +8,14 @@ class GalleryList extends Component {
             return (
                 <img key={image.id} alt={image.alt} src={image.path} />
             )
-            
+
         })
 
-        
-        return(
+
+        return (
             // <p>images here</p>
             <>
-            <li>{imageToRender}</li>
-            <GalleryItem />
+                <li>{imageToRender}</li>
             </>
         )
         // return(
@@ -25,5 +23,4 @@ class GalleryList extends Component {
         // )
     }
 }
-
-export default GalleryList;
+export default GalleryItem;

@@ -42,7 +42,7 @@ class App extends Component {
         <br/>
         <GalleryList galleryList={this.state.galleryList}/>
         {/* <p>Gallery goes here</p> */}
-        <img alt="A mountain goat at Glacier National Park."src="images/goat_small.jpg"/>
+        {/* <img alt="A mountain goat at Glacier National Park."src="images/goat_small.jpg"/> */}
       </div>
     );
   }
