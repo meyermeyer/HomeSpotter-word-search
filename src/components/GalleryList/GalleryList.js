@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import GalleryItem from '../GalleryItem/GalleryItem';
 
 class GalleryList extends Component {
-
-
+    
     render() {
         let galleryItem;
         
@@ -23,15 +22,17 @@ class GalleryList extends Component {
         
         
         return(
-            <li>
-                {this.props.galleryList.map((image) => {
-                console.log(image);
+            <ul>
+                {/* loop through galleryList, send each image to GalleryItem component then render. */}
+                {this.props.galleryList.map((galleryItem) => {
+                // console.log(image);
                     return (
-                        <GalleryItem key={image.id} galleryItem={image}/>
+                        //image.id is a unique id
+                        <GalleryItem key={galleryItem.id} galleryItem={galleryItem}/>
                     )
                     })}
                 
-            </li>
+            </ul>
             // <p>images here</p>
             // <>
             // {/* <li>{imageToRender}</li> */}
