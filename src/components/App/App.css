@@ -22,16 +22,24 @@
   to { transform: rotate(360deg); }
 }
 
-li {
+.galleryList {
   display: inline-block;
 }
 
+.galleryItem{
+  display: block;
+  list-style-type: none;
+}
+
+
 img {
-  width: 100px;
-  height: 100px
+  width: 200px;
+  height: 200px
 }
 
 .imgDesc {
-  width: 100px;
-  height: 100px
+  width: 200px;
+  height: 200px;
+  margin: 0;
+  vertical-align: middle;
 }

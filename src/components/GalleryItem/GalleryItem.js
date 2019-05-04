@@ -5,9 +5,11 @@ class GalleryItem extends Component {
     //add state for isClicked boolean
 
     state = {
-        isClicked: false
+        isClicked: false,
+        likes: 0
 
     }
+
     handleClick = () => {
         console.log('clicked');
         this.setState({
@@ -15,6 +17,12 @@ class GalleryItem extends Component {
         })
         
     }
+
+    handleLike = () => {
+        console.log('clicked like');
+        
+    }
+
     render() {
         console.log('image clicked', this.state);
         let contentToRender;
@@ -23,13 +31,13 @@ class GalleryItem extends Component {
         //conditional rendering
         if (this.state.isClicked) {
             contentToRender = (
-                <p className="imgDesc">{this.props.galleryItem.description}</p> 
-                
+                <p className="imgDesc">{this.props.galleryItem.description}</p>
                 
             )
         } else {
             contentToRender = (
-                <img alt={this.props.galleryItem.alt} src={this.props.galleryItem.path} />
+                    <img alt={this.props.galleryItem.alt} src={this.props.galleryItem.path} />
+            
             )
         }
         
@@ -46,7 +54,12 @@ class GalleryItem extends Component {
         
         
             // <p>images here</p>
-            <li onClick={this.handleClick}>{contentToRender}</li>
+            <li className="galleryList">
+                <ul>
+                <li className="galleryItem" onClick={this.handleClick}>{contentToRender}</li>
+                <li className="galleryItem" ><button onClick={this.handleLike}>Like</button></li>
+                </ul>
+            </li>
             
             
         )
