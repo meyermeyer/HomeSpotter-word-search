@@ -20,6 +20,8 @@ class GalleryItem extends Component {
 
     handleLike = () => {
         console.log('clicked like');
+        // console.log(this.props.galleryItem.id);
+        
         //axios PUT request to server to trigger like counter increase
         axios.put('/gallery/like/'+this.props.galleryItem.id)
         .then((response) => {
