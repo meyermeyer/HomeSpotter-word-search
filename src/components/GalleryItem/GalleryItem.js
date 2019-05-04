@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class GalleryItem extends Component {
 
@@ -6,7 +7,6 @@ class GalleryItem extends Component {
 
     state = {
         isClicked: false,
-        likes: 0
 
     }
 
@@ -20,6 +20,14 @@ class GalleryItem extends Component {
 
     handleLike = () => {
         console.log('clicked like');
+        //axios PUT request to server to trigger like counter increase
+        axios.put('/gallery/like/'+this.props.galleryItem.id)
+        .then((response) => {
+            console.log('in handleLike', response);
+            this.props.getGalleryList();
+        })
+
+        //display like number on DOM
         
     }
 
@@ -58,6 +66,7 @@ class GalleryItem extends Component {
                 <ul>
                 <li className="galleryItem" onClick={this.handleClick}>{contentToRender}</li>
                 <li className="galleryItem" ><button onClick={this.handleLike}>Like</button></li>
+                <li>{this.props.galleryItem.likes} Likes</li>
                 </ul>
             </li>
             

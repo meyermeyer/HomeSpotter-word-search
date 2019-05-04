@@ -28,7 +28,7 @@ class GalleryList extends Component {
                 // console.log(image);
                     return (
                         //image.id is a unique id
-                        <GalleryItem key={galleryItem.id} galleryItem={galleryItem}/>
+                        <GalleryItem key={galleryItem.id} getGalleryList={this.props.getGalleryList} galleryItem={galleryItem}/>
                     )
                     })}
                 
