@@ -22,7 +22,7 @@ class GalleryItem extends Component {
         console.log('in handleDelete');
 
         //axios DELETE call
-        axios.delete('/gallery' + this.props.galleryItem.id)
+        axios.delete('/gallery/' + this.props.galleryItem.id)
             .then(response => {
                 console.log('in DELETE with', response);
                 //refresh DOM with updated list

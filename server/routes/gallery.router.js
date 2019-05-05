@@ -5,14 +5,46 @@ const pool = require('../modules/pool');
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
+//DELETE route
+// router.delete('/:id', (req,res) => {
+//     console.log('in DELETE');
+//     let query = `
+//         DELETE FROM "gallery" WHERE "id" = $1;
+//         `
+//     pool.query(query,[req.params.id])
+//     .then((result) => {
+//         console.log(result);
+//         res.sendStatus(200);
+//     })//end .then
+//     .catch(error => {
+//         console.log('error in DELETE /gallery', error);
+//         res.sendStatus(500);
+//     })//end .catch
+// }//end DELETE /gallery route
+
+router.delete('/:id', (req,res) => {
+    console.log('in DELETE');
+    let query = `
+         DELETE FROM "gallery" WHERE "id" = $1
+         `
+    pool.query(query, [req.params.id])
+    .then(result => {
+        console.log('back from DELETE with', result);
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in DELETE', error);
+        res.sendStatus(500);
+    })
+    
+})
 
 //POST route to database
 router.post('/', (req,res) => {
     console.log('in POST');
     let query = `
-    INSERT INTO "gallery" ("path", "description")
-    VALUES($1,$2)
-    `
+        INSERT INTO "gallery" ("path", "description")
+        VALUES($1,$2)
+        `
     pool.query(query,[req.body.path, req.body.description])
     .then(result => {
         console.log(result);
