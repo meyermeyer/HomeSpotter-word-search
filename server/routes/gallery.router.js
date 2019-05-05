@@ -5,6 +5,25 @@ const pool = require('../modules/pool');
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
+
+//POST route to database
+router.post('/', (req,res) => {
+    console.log('in POST');
+    let query = `
+    INSERT INTO "gallery" ("path", "description")
+    VALUES($1,$2)
+    `
+    pool.query(query,[req.body.path, req.body.description])
+    .then(result => {
+        console.log(result);
+        res.sendStatus(204)
+    })
+    .catch(error => {
+        console.log('error in POST /gallery', error);
+        
+    })
+})
+
 //new PUT route to database
 router.put('/like/:id', (req,res) => {
     console.log(req.params);
