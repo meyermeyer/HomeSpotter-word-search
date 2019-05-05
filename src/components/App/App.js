@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import GalleryList from '../GalleryList/GalleryList'
+import GalleryForm from '../GalleryForm/GalleryForm'
 import axios from 'axios';
 
 class App extends Component {
@@ -32,9 +33,6 @@ class App extends Component {
       })//end axios get .catch
   }
 
-
-
-
   render() {
     return (
       <div className="App">
@@ -42,6 +40,7 @@ class App extends Component {
           <h1 className="App-title">Gallery of my life</h1>
         </header>
         <br/>
+        <GalleryForm />
         {/* pass getGalleryList function as a prop so child can send to next child to re-render like count after like click */}
         <GalleryList getGalleryList={this.getGalleryList} galleryList={this.state.galleryList}/>
         {/* <p>Gallery goes here</p> */}
