@@ -26,6 +26,7 @@ class GalleryForm extends Component {
     handleSubmit = (event)=> {
         event.preventDefault();
         console.log('in handleSubmit');
+        this.props.submitGalleryItem(this.state.newGalleryItem);
         this.setState({
             newGalleryItem: {
                 path: '',

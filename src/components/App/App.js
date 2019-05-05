@@ -33,6 +33,20 @@ class App extends Component {
       })//end axios get .catch
   }
 
+  //newGalleryItem passed from GalleryList component
+  submitGalleryItem = (newGalleryItem) => {
+    console.log('in submitGalleryItem');
+    //axios POST route
+    axios.post('/gallery', newGalleryItem)
+    .then(response => {
+      console.log(response);
+      this.getGalleryList();
+    }) //end axios post /gallery
+    .catch(error => {
+      console.log('error in post', error); 
+    })//end .catch
+  }//end submitGalleryItem
+
   render() {
     return (
       <div className="App">
@@ -40,7 +54,8 @@ class App extends Component {
           <h1 className="App-title">Gallery of my life</h1>
         </header>
         <br/>
-        <GalleryForm />
+        {/* pass submitGalleryItem function to GalleryForm */}
+        <GalleryForm submitGalleryItem={this.submitGalleryItem}/>
         {/* pass getGalleryList function as a prop so child can send to next child to re-render like count after like click */}
         <GalleryList getGalleryList={this.getGalleryList} galleryList={this.state.galleryList}/>
         {/* <p>Gallery goes here</p> */}

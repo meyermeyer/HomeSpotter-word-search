@@ -5,6 +5,14 @@ const pool = require('../modules/pool');
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
+
+//POST route to database
+router.post('/', (req,res) => {
+    console.log('in POST');
+    let query = ``
+    
+})
+
 //new PUT route to database
 router.put('/like/:id', (req,res) => {
     console.log(req.params);
