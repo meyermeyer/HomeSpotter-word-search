@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 //fixes photo orientation, but does weird stuff to the sizing and placement
 // import ExifOrientationImg from 'react-exif-orientation-img';
 
@@ -89,8 +91,11 @@ class GalleryItem extends Component {
                     <li className="galleryItem" onClick={this.handleClick}>{contentToRender}</li>
                     <li className="galleryItem" >
                         {this.props.galleryItem.likes} Likes
-                        <button onClick={this.handleLike}>Like</button>
-                        <button onClick={this.handleDelete}>Delete</button>
+                        <Button variant="contained" color="primary" size="small" onClick={this.handleLike}>Like</Button>
+                        <Button variant="contained" color="secondary" size="small" onClick={this.handleDelete}>
+                            Delete
+                            <DeleteIcon/>
+                        </Button>
                     </li>
                 </ul>
             </li>
