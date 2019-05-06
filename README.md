@@ -1,3 +1,53 @@
+#GALLERY OF MY LIFE
+This is a photo gallery app.  Users can like photos and a like counter displays below each one.  Clicking on the photo displays an image description.
+
+Users can add new image URLs and descriptions and delete existing photos.
+
+#Built With
+Node
+JavaScript
+React
+PostgreSql
+materialUI
+
+#Getting Started
+Download this project.
+npm install
+npm run server
+npm run client
+
+#Prerequisites
+node.js
+pg
+
+#Completed Features
+add new photo feature
+like counter
+like button
+delete button
+image description displays on click of photo
+
+#Next Steps
+conditional rendering to fix "1 likes" gammatical error
+complete materialUI formatting for consistency
+add Uppy option for users to upload their own photos
+change interface from 'likes' to the 'cute' or 'terrible' app.
+
+ Feature c
+Deployment
+Add additional notes about how to deploy this on a live system
+
+Authors
+Name of author(s)
+Acknowledgments
+Hat tip to anyone who's code was used
+
+
+
+
+
+
+##INSTRUCTIONS
 # React - Gallery of My Life
 
 Before you get started make sure to look through the code that has been provided. Server side code to retrieve data (`GET`) and like a photo (`PUT`) have been provided for you. For practice, we recommend testing out these routes in Postman. You should not need to modify these routes for base mode.
