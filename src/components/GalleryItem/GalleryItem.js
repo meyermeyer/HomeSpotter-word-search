@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+//fixes photo orientation, but does weird stuff to the sizing and placement
+// import ExifOrientationImg from 'react-exif-orientation-img';
 
 class GalleryItem extends Component {
 
