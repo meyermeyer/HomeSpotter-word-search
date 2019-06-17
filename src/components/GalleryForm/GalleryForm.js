@@ -22,7 +22,9 @@ class GalleryForm extends Component {
                 newGalleryItem: {
                     ...this.state.newGalleryItem,
                     [property]: event.target.value
+                
                 }
+                
             })//end setState
         }//end return
     } //end handleChangeFor

@@ -45,22 +45,35 @@ class App extends Component {
     .catch(error => {
       console.log('error in post', error); 
     })//end .catch
-  }//end submitGalleryItem
+  };//end submitGalleryItem
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Gallery of my life</h1>
-        </header>
-        <br/>
-        {/* pass submitGalleryItem function to GalleryForm */}
-        <GalleryForm submitGalleryItem={this.submitGalleryItem}/>
-        {/* pass getGalleryList function as a prop so child can send to next child to re-render like count after like click */}
-        <GalleryList getGalleryList={this.getGalleryList} galleryList={this.state.galleryList}/>
-        {/* <p>Gallery goes here</p> */}
-        {/* <img alt="A mountain goat at Glacier National Park."src="images/goat_small.jpg"/> */}
-      </div>
+      <>
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">Gallery of my life</h1>
+          </header>
+          <br/>
+          {/* pass submitGalleryItem function to GalleryForm */}
+          <GalleryForm submitGalleryItem={this.submitGalleryItem}/>
+          {/* pass getGalleryList function as a prop so child can send to next child to re-render like count after like click */}
+          <GalleryList getGalleryList={this.getGalleryList} galleryList={this.state.galleryList}/>
+          {/* <p>Gallery goes here</p> */}
+          {/* <img alt="A mountain goat at Glacier National Park."src="images/goat_small.jpg"/> */}
+        </div>
+        {/* <div>
+          <ReactMic
+            record={this.state.record}
+            className="sound-wave"
+            onStop={this.onStop}
+            onData={this.onData}
+            strokeColor="#000000"
+            backgroundColor="#FF4081" />
+          <button onTouchTap={this.startRecording} type="button">Start</button>
+          <button onTouchTap={this.stopRecording} type="button">Stop</button>
+        </div> */}
+      </>
     );
   }
 }

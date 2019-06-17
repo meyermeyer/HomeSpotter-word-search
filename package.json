@@ -11,13 +11,14 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-exif-orientation-img": "^0.1.5",
+    "react-mic": "^12.4.1",
     "react-scripts": "^2.1.3"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
   },
   "scripts": {
-    "start": "react-scripts build && node server/server.js",
+    "start": "react-scripts build || node server/server.js",
     "client": "react-scripts start",
     "server": "nodemon  --watch server server/server.js",
     "test": "react-scripts test --env=jsdom",

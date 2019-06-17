@@ -10,7 +10,7 @@ CREATE TABLE "gallery"
 INSERT INTO "gallery"
     ("path", "description", "alt")
 VALUES
-    ('images/IMG_5192.gif', 'GIF of my band Miss Manners', 'The four Miss Manners bandmates lying in a start formation on the floor with their heads in the center.'),
+    ('images/IMG_5192.gif', 'GIF of my band Miss Manners', 'The four Miss Manners bandmates lying in a star formation on the floor with their heads in the center.'),
     ('images/IMG_4815.png', 'Photo of my boyfriend, Kase and my kid, Sal in front of a huge monitor lizard.', 'An excited long haired boy holds a young child in front of an enclosure for a giant monitor lizard.'),
     ('images/IMG_4691.png', 'Me with Kase and Sal at a friend''s farm near Taylor''s Falls.', 'Two smiling adults snuggle a three year old on a grey couch.'),
     ('images/IMG_5281.png', 'Sal playing with his ''unicorn popper'' toy at the playground near our house.', 'A kid with staticky hair stans on top of an outdoor play structure holding a pink unicorn ball-shooting toy.'),
