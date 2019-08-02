@@ -5,7 +5,6 @@ class Input extends Component {
     state = {
         inputValue: '',
         rowLength: 0,
-        potentialWords: []
     }
 
     handleChange = (event) => {
@@ -13,26 +12,29 @@ class Input extends Component {
         this.setState({
             inputValue: event.target.value
         })
-        
     }
 
     handleSubmit = (event)=>{
         event.preventDefault()
         console.log('in handleSubmit', this.state.inputValue);
+        //remove spaces
+        // let noSpaces = this.state.inputValue.split(' ').join('')
+        // console.log('no Spaces', noSpaces)
         //replace line breaks with '/'
-        let newString = this.state.inputValue.replace(/[\n\r]/g, '/') 
+        let newString = this.state.inputValue.replace(/[\n\r]/g, '/').split(' ').join('')
         console.log('newString', newString)
         let rowLength = 0
         let matrix=[]
         let transposedMatrix = []
         let row =''
-
         let potentialWords = {}
 
         let storePotentialWords = (row) => {
             console.log('in storePotentialWords', row);
             //for each row, find all strings 4 letters or longer
+            // i looks at each letter in the row
             for (let i = 0; i < row.length - 3; i++) {
+                //j varries the word length, returning every 'word' 4 characters or longer for each letter
                 for(let j=4; i+j<=row.length; j++) {
                     // if a key of string is already in the potentialWords object, do not add string
                     if (potentialWords[row.substring(i, i + j)]){
@@ -49,8 +51,7 @@ class Input extends Component {
         }
 
         let transposeMatrix = (matrix) =>{
-
-            //# of rows = length of each row in original matrix
+            //define transposedMatrix, an array of arrays.  # of arrays is equal to lenght of each array in original matrix
             for (let i=0; i<matrix[0].length; i++){
                 transposedMatrix.push([])
             }
@@ -60,12 +61,13 @@ class Input extends Component {
                 for (let j=0; j<matrix[i].length; j++){
                     transposedMatrix[j].push(matrix[i][j])
                 }
-        
             }
+
+            //send each row of transposedMatrix to storePotentialWords function
+            //convert array to string with .join('') '' so no spaces or commas between letters 
             for (row of transposedMatrix) {
                 storePotentialWords(row.join(''))
             }
-            
             console.log('transposedMatrix', transposedMatrix)
         }
 
@@ -84,44 +86,26 @@ class Input extends Component {
                     rowLength: rowLength
                 })
                 rowLength=0
-                    
             }
-
         }
+        //transpose matrix to find vertical strings
         transposeMatrix(matrix)
-
-
-               
-        // for (let row of matrix){
-        //     let potentialWords = []
-        //     for (let i=0; i<row.length; i++) {
-        //         if (i+3<row.length) {
-        //             let potentialWord = [row[i] + row[i + 1] + row[i + 2] + row[i + 3]]
-        //             potentialWords.push(potentialWord)
-        //             console.log('potentialWords', potentialWord);
-                    
-        //         }        
-        //     }
-        // }
     }
-    
-    
 
     render(){
         console.log('state', this.state);
         
         return(
         <form onSubmit={this.handleSubmit}>
-                <TextField
-                    multiline
-                    id="string-input"
-                    label="String Input"
-                    margin="normal"
-                    onChange={this.handleChange}
-                />
-                <Button type="submit" variant="contained">Submit</Button>
+            <TextField
+                multiline
+                id="string-input"
+                label="String Input"
+                margin="normal"
+                onChange={this.handleChange}
+            />
+            <Button type="submit" variant="contained">Submit</Button>
         </form>
-            
         )
     }
 }
