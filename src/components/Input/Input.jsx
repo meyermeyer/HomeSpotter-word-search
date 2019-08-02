@@ -24,19 +24,49 @@ class Input extends Component {
         console.log('newString', newString)
         let rowLength = 0
         let matrix=[]
+        let transposedMatrix = []
         let row =''
 
-        let potentialWords = []
+        let potentialWords = {}
 
         let storePotentialWords = (row) => {
             console.log('in storePotentialWords', row);
-
+            //for each row, find all strings 4 letters or longer
             for (let i = 0; i < row.length - 3; i++) {
-
-                potentialWords.push(row.substring(i, row.length))
+                for(let j=4; i+j<=row.length; j++) {
+                    // if a key of string is already in the potentialWords object, do not add string
+                    if (potentialWords[row.substring(i, i + j)]){
+                    }
+                    else {
+                        potentialWords = {
+                            ...potentialWords,
+                            [row.substring(i, i + j)] : row.substring(i, i + j)
+                        }
+                    }
+                }
                 console.log('substring', potentialWords)
             }
+        }
+
+        let transposeMatrix = (matrix) =>{
+
+            //# of rows = length of each row in original matrix
+            for (let i=0; i<matrix[0].length; i++){
+                transposedMatrix.push([])
+            }
+            console.log('transposed matrix empty', transposedMatrix)
+
+            for (let i=0; i<matrix.length; i++){
+                for (let j=0; j<matrix[i].length; j++){
+                    transposedMatrix[j].push(matrix[i][j])
+                }
         
+            }
+            for (row of transposedMatrix) {
+                storePotentialWords(row.join(''))
+            }
+            
+            console.log('transposedMatrix', transposedMatrix)
         }
 
         for (let letter of newString){
@@ -54,11 +84,14 @@ class Input extends Component {
                     rowLength: rowLength
                 })
                 rowLength=0
-                
+                    
             }
+
         }
-        
-        
+        transposeMatrix(matrix)
+
+
+               
         // for (let row of matrix){
         //     let potentialWords = []
         //     for (let i=0; i<row.length; i++) {
@@ -67,13 +100,9 @@ class Input extends Component {
         //             potentialWords.push(potentialWord)
         //             console.log('potentialWords', potentialWord);
                     
-        //         }
-                
-            
+        //         }        
         //     }
         // }
-       
-
     }
     
     
