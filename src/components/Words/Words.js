@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
+import {List, ListItem} from '@material-ui/core'
+
 class Words extends Component {
     render() {
         return (
             <>
                 <h3>Words</h3>
-                <ul>
+                <List>
                     {this.props.reduxState.wordsReducer && this.props.reduxState.wordsReducer.map((word, i)=>(
-                        <li key={i}>{word}</li>
+                        <ListItem key={i}>{word}</ListItem>
                     ))}
-                </ul>
+                </List>
             </>
         )
     }

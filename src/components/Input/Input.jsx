@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import { Button, TextField } from '@material-ui/core'
+import { IconButton, TextField, List, ListItem } from '@material-ui/core'
 import axios from 'axios';
 import {connect} from 'react-redux'
 
 import {withStyles} from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search'
 
 const styles = theme => ({
     input: {
@@ -124,15 +125,21 @@ class Input extends Component {
         
         return(
         <form onSubmit={this.handleSubmit}>
-            <TextField
-                className={this.props.classes.input}
-                multiline
-                id="string-input"
-                label="String Input"
-                margin="normal"
-                onChange={this.handleChange}
-            />
-            <Button type="submit" variant="contained">Submit</Button>
+            <List>
+                <ListItem>
+                        <TextField
+                            className={this.props.classes.input}
+                            multiline
+                            id="string-input"
+                            label="String Input"
+                            margin="normal"
+                            onChange={this.handleChange}
+                        />
+                        <IconButton type="submit" variant="contained">
+                            <SearchIcon />
+                        </IconButton>
+                </ListItem>
+            </List>
         </form>
         )
     }
