@@ -1,7 +1,15 @@
 import React, {Component} from 'react'
-import { Button, TextField, BottomNavigationAction} from '@material-ui/core'
+import { Button, TextField } from '@material-ui/core'
 import axios from 'axios';
 import {connect} from 'react-redux'
+
+import {withStyles} from '@material-ui/core'
+
+const styles = theme => ({
+    input: {
+        width: '50vw'
+    }
+});
 
 class Input extends Component {
     state = {
@@ -20,8 +28,8 @@ class Input extends Component {
         event.preventDefault()
         console.log('in handleSubmit', this.state.inputValue);
 
-        //change line breaks to '/', remove spaces between letters
-        let newString = this.state.inputValue.replace(/[\n\r]/g, '/').split(' ').join('').toLowerCase()
+        //change line breaks to '/', remove quotation marks if present, remove spaces between letters
+        let newString = this.state.inputValue.replace(/[\n\r]/g, '/').replace(/(['"])/g, '').split(' ').join('').toLowerCase()+'/'
         console.log('newString', newString)
         let rowLength = 0
         let matrix=[]
@@ -94,7 +102,7 @@ class Input extends Component {
         
         axios.post('/api/words', potentialWords)
             .then(result=>{
-                // potentialWords={}
+                potentialWords={}
                 console.log('back from POST', result);
                 axios.get('/api/words')
                     .then(result => {
@@ -117,6 +125,7 @@ class Input extends Component {
         return(
         <form onSubmit={this.handleSubmit}>
             <TextField
+                className={this.props.classes.input}
                 multiline
                 id="string-input"
                 label="String Input"
@@ -129,4 +138,4 @@ class Input extends Component {
     }
 }
 
-export default connect()(Input)
+export default withStyles(styles)(connect()(Input))

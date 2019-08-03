@@ -18,6 +18,7 @@ let foundWords = []
 // console.log('dictionary object', dictionaryObject)
 router.post('/', (req,res)=>{
     potentialWords = Object.keys(req.body)
+    foundWords = []
     // console.log('potentialWords', potentialWords)
     // console.log('dictionary object', dictionaryObject)
     for (let string of potentialWords) {
@@ -31,7 +32,6 @@ router.post('/', (req,res)=>{
             foundWords.push(reverse)
         }
     }
-    potentialWords = []
     res.sendStatus(200)
 })
 
