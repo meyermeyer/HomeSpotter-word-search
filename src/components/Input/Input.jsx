@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import { Button, TextField} from '@material-ui/core'
+import { Button, TextField, BottomNavigationAction} from '@material-ui/core'
 import axios from 'axios';
+import {connect} from 'react-redux'
 
 class Input extends Component {
     state = {
@@ -93,10 +94,12 @@ class Input extends Component {
         
         axios.post('/api/words', potentialWords)
             .then(result=>{
+                // potentialWords={}
                 console.log('back from POST', result);
                 axios.get('/api/words')
                     .then(result => {
                         console.log('back from GET', result);
+                        this.props.dispatch({type: 'STORE_WORDS', payload: result.data})
                     })
                     .catch(err => {
                         console.log('error in GET', err);
@@ -126,4 +129,4 @@ class Input extends Component {
     }
 }
 
-export default Input
+export default connect()(Input)
