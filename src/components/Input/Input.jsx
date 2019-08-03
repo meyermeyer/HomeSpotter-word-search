@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { Button, TextField} from '@material-ui/core'
+import axios from 'axios';
 
 class Input extends Component {
     state = {
@@ -17,11 +18,9 @@ class Input extends Component {
     handleSubmit = (event)=>{
         event.preventDefault()
         console.log('in handleSubmit', this.state.inputValue);
-        //remove spaces
-        // let noSpaces = this.state.inputValue.split(' ').join('')
-        // console.log('no Spaces', noSpaces)
-        //replace line breaks with '/'
-        let newString = this.state.inputValue.replace(/[\n\r]/g, '/').split(' ').join('')
+
+        //change line breaks to '/', remove spaces between letters
+        let newString = this.state.inputValue.replace(/[\n\r]/g, '/').split(' ').join('').toLowerCase()
         console.log('newString', newString)
         let rowLength = 0
         let matrix=[]
@@ -90,6 +89,23 @@ class Input extends Component {
         }
         //transpose matrix to find vertical strings
         transposeMatrix(matrix)
+        console.log('potentialWords', potentialWords);
+        
+        axios.post('/api/words', potentialWords)
+            .then(result=>{
+                console.log('back from POST', result);
+                axios.get('/api/words')
+                    .then(result => {
+                        console.log('back from GET', result);
+                    })
+                    .catch(err => {
+                        console.log('error in GET', err);
+                    })
+            })
+            .catch(err=>{
+                console.log('error in POST', err);
+            })
+        
     }
 
     render(){
