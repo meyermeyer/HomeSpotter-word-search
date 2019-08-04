@@ -9,6 +9,9 @@ import SearchIcon from '@material-ui/icons/Search'
 const styles = theme => ({
     input: {
         width: '50vw'
+    },
+    button: {
+        verticalAlign: 'sub'
     }
 });
 
@@ -105,7 +108,7 @@ class Input extends Component {
             .then(result=>{
                 potentialWords={}
                 console.log('back from POST', result);
-                axios.get('/api/words')
+                axios.get('/api/words/all')
                     .then(result => {
                         console.log('back from GET', result);
                         this.props.dispatch({type: 'STORE_WORDS', payload: result.data})
@@ -127,6 +130,7 @@ class Input extends Component {
         <form onSubmit={this.handleSubmit}>
             <List>
                 <ListItem>
+                    <div > 
                         <TextField
                             className={this.props.classes.input}
                             multiline
@@ -135,9 +139,11 @@ class Input extends Component {
                             margin="normal"
                             onChange={this.handleChange}
                         />
-                        <IconButton type="submit" variant="contained">
+                        <IconButton className={this.props.classes.button} type="submit" variant="contained">
                             <SearchIcon />
                         </IconButton>
+                    </div>
+                        
                 </ListItem>
             </List>
         </form>

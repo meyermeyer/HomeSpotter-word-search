@@ -14,15 +14,37 @@ for(let word of dictionaryArray) {
 }
 let potentialWords
 let foundWords = []
+let reducedWordList = []
 
-// console.log('dictionary object', dictionaryObject)
+//function to remove short words contained in longer words
+let removeShortWords = (words)=>{
+    reducedWordList.push(...words)
+    console.log('removeShortWords', words);
+    words.map((word, j)=>{
+        words.map((otherWord)=>{
+            for(let i=0; i<otherWord.length; i++){
+                //if other word is longer, if other word contains first letter of 'word, 
+                //and if word length is less than remaining letters in string, check for matches
+                if (otherWord.length > word.length && otherWord[i] === word[0] && word.length <= otherWord.length - i+1) {
+                    //if substring starting at matching letter of length same length as 'word' is word, 
+                    //remove from array
+                    console.log('potential match', word, otherWord, otherWord[i]);
+                    if (otherWord.substring(i, i + word.length) === word) {
+                        reducedWordList.splice(j,1)
+                    }
+                }            
+            }
+        })
+        // foundWords.push(word)
+    })
+    console.log('reducedWordList', reducedWordList, words);
+}
+
 router.post('/', (req,res)=>{
     potentialWords = Object.keys(req.body)
     foundWords = []
-    // console.log('potentialWords', potentialWords)
-    // console.log('dictionary object', dictionaryObject)
     for (let string of potentialWords) {
-        console.log('potentialWords strings', string)
+        //reverse each string
         let reverse = string.split("").reverse().join("")
         if (dictionaryObject[string]){
             foundWords.push(string)
@@ -32,12 +54,20 @@ router.post('/', (req,res)=>{
             foundWords.push(reverse)
         }
     }
+    console.log('foundWords in POST', foundWords);
+    removeShortWords(foundWords)
     res.sendStatus(200)
 })
 
-router.get('/', (req,res)=>{
-    console.log('in GET');
+router.get('/all', (req,res)=>{
+    console.log('in GET /', foundWords);
     res.send(foundWords)
+})
+
+router.get('/reduced', (req,res)=>{
+    console.log('in GET /reduced');
+    res.send(reducedWordList)
+    
 })
 
 module.exports = router;
