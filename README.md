@@ -1,7 +1,4 @@
 ### Setup
-
-There is no database component to base mode. All data is stored in an array on the server. Before you get started, add a few images to the `public/images` folder and modify the `server/modules/data.js` to include an `id`, `title`, `description` and `path for` each of your images. Each `id` should be a unique number (e.g. 1, 2, 3...).
-
 Running the server code requires `nodemon`. If you don't already have `nodemon`, install it globally with `npm install nodemon --global`.
 
 ```
@@ -15,5 +12,13 @@ Now that the server is running, open a new terminal tab with `cmd + t` and start
 npm run client
 ```
 
-Between the server and client, you'll need two terminal tabs! Because we're using `nodemon`, both our client side and server side will automatically spin back up when changes are made!
+
+### Checking the Code
+Enter the word search string into the UI.  It needs to be a rectangle (each row has the same number of letters).  Spaces and quotation marks shouldn't break it, but other special characters may.  
+
+### Known Bugs
+There is no form validation to confirm submission is valid (see constraints above).
+If you hit the 'bonus mode' button more than once, it clears the entries.  You need to perform the search again to re-render them.
+
+
 

@@ -28,7 +28,6 @@ class Input extends Component {
     }
 
     handleChange = (event) => {
-        console.log('in handleChange', event.target.value);
         this.setState({
             inputValue: event.target.value
         })
@@ -36,11 +35,8 @@ class Input extends Component {
 
     handleSubmit = (event)=>{
         event.preventDefault()
-        console.log('in handleSubmit', this.state.inputValue);
-
         //change line breaks to '/', remove quotation marks if present, remove spaces between letters
         let newString = this.state.inputValue.replace(/[\n\r]/g, '/').replace(/(['"])/g, '').split(' ').join('').toLowerCase()+'/'
-        console.log('newString', newString)
         let rowLength = 0
         let matrix=[]
         let transposedMatrix = []
@@ -48,7 +44,6 @@ class Input extends Component {
         let potentialWords = {}
 
         let storePotentialWords = (row) => {
-            console.log('in storePotentialWords', row);
             //for each row, find all strings 4 letters or longer
             // i looks at each letter in the row
             for (let i = 0; i < row.length - 3; i++) {
@@ -64,7 +59,6 @@ class Input extends Component {
                         }
                     }
                 }
-                console.log('substring', potentialWords)
             }
         }
 
@@ -73,20 +67,18 @@ class Input extends Component {
             for (let i=0; i<matrix[0].length; i++){
                 transposedMatrix.push([])
             }
-            console.log('transposed matrix empty', transposedMatrix)
-
+            //loop through array of arrays
             for (let i=0; i<matrix.length; i++){
+            //loop through each row
                 for (let j=0; j<matrix[i].length; j++){
                     transposedMatrix[j].push(matrix[i][j])
                 }
             }
-
             //send each row of transposedMatrix to storePotentialWords function
             //convert array to string with .join('') '' so no spaces or commas between letters 
             for (row of transposedMatrix) {
                 storePotentialWords(row.join(''))
             }
-            console.log('transposedMatrix', transposedMatrix)
         }
 
         for (let letter of newString){
@@ -98,7 +90,6 @@ class Input extends Component {
                 storePotentialWords(row)
                 matrix.push(row)
                 row=''
-                console.log('counter', rowLength, matrix);
                 this.setState({
                     ...this.state,
                     rowLength: rowLength
@@ -108,30 +99,28 @@ class Input extends Component {
         }
         //transpose matrix to find vertical strings
         transposeMatrix(matrix)
-        console.log('potentialWords', potentialWords);
         
+        //send potential words to server
         axios.post('/api/words', potentialWords)
             .then(result=>{
                 potentialWords={}
-                console.log('back from POST', result);
+                //await result then GET returned word list from server
                 axios.get('/api/words/all')
                     .then(result => {
-                        console.log('back from GET', result);
+                        //store in redux
                         this.props.dispatch({type: 'STORE_WORDS', payload: result.data})
                     })
                     .catch(err => {
-                        console.log('error in GET', err);
+                        console.log('error in GET /api/words/all', err);
                     })
             })
             .catch(err=>{
-                console.log('error in POST', err);
+                console.log('error in POST /api/words', err);
             })
         
     }
 
     render(){
-        console.log('state', this.state);
-        
         return(
         <form onSubmit={this.handleSubmit}>
             <List>

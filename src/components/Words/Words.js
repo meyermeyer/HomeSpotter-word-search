@@ -11,21 +11,20 @@ class Words extends Component {
     }
 
     handleClick=()=>{
-        console.log('in handleClick');
         this.setState({
             ...this.state,
             buttonIsClicked: true
         })
+        //GET reduced words list from server
         axios.get('/api/words/reduced')
             .then(response=>{
-                console.log('response', response);
                 this.setState({
                     //sort alphabetically
                     reducedWordList: response.data.sort()
                 })
             })
             .catch(err=>{
-                console.log('error in Get /reduced', err);
+                console.log('error in Get /api/words/reduced', err);
             })
     }
     render() {
@@ -40,7 +39,7 @@ class Words extends Component {
                     </List>
                 </Grid>
                 <Grid item xs={6}>
-                    <Button disabled={this.state.buttonIsClicked} variant="contained" color="secondary" onClick={this.handleClick}>Bonus Mode!</Button>
+                    <Button variant="contained" color="secondary" onClick={this.handleClick}>Bonus Mode!</Button>
                     <List>
                         {this.state.reducedWordList && this.state.reducedWordList.map((word, i) => (
                             <ListItem key={i}>{word}</ListItem>

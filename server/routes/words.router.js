@@ -1,5 +1,4 @@
 const express = require('express');
-const pool = require('../modules/pool');
 const router = express.Router();
 const fs = require("fs");
 
@@ -19,7 +18,6 @@ let reducedWordList = []
 //function to remove short words contained in longer words
 let removeShortWords = (words)=>{
     reducedWordList.push(...words)
-    console.log('removeShortWords', words);
     words.map((word, j)=>{
         words.map((otherWord)=>{
             for(let i=0; i<otherWord.length; i++){
@@ -28,25 +26,18 @@ let removeShortWords = (words)=>{
                 if (otherWord.length > word.length && otherWord[i] === word[0] && word.length <= otherWord.length - i ) {
                     //if substring starting at matching letter of length same length as 'word' is word, 
                     //remove from array
-                    console.log('potential match', word, otherWord, otherWord[i]);
                     if (otherWord.substring(i, i + word.length) === word) {
-                        // console.log('substring', otherWord.substring(i, i + word.length));
                         let index = reducedWordList.indexOf(word)
                         //prevent instance where word is contained in more than one of the other words don't try to remove the same word twice
                         if (index>-1){
                             reducedWordList.splice(index, 1)
-                            console.log('match removed', index, word, reducedWordList, reducedWordList.length);
                         }
-                    }
-                    else {
-                        console.log('no match', word, otherWord.substring(i, i + word.length));
                     }
                 }            
             }
         })
-        // foundWords.push(word)
     })
-    console.log('reducedWordList', reducedWordList, words);
+
 }
 
 router.post('/', (req,res)=>{
@@ -63,22 +54,19 @@ router.post('/', (req,res)=>{
             foundWords.push(reverse)
         }
     }
-    console.log('foundWords in POST', foundWords);
+    //run bonus mode function to remove small words contained in larger words
     removeShortWords(foundWords)
     res.sendStatus(200)
 })
 
 router.get('/all', (req,res)=>{
-    console.log('in GET /', foundWords);
     res.send(foundWords)
     foundWords = []
 })
 
 router.get('/reduced', (req,res)=>{
-    console.log('in GET /reduced');
     res.send(reducedWordList)
     reducedWordList = []
-    
 })
 
 module.exports = router;
