@@ -11,7 +11,13 @@ const styles = theme => ({
         width: '50vw'
     },
     button: {
-        verticalAlign: 'sub'
+        verticalAlign: 'sub',
+        position: 'absolute',
+        right: 0,
+        bottom: 0
+    },
+    container: {
+        position: 'relative'
     }
 });
 
@@ -130,7 +136,7 @@ class Input extends Component {
         <form onSubmit={this.handleSubmit}>
             <List>
                 <ListItem>
-                    <div > 
+                    <div className={this.props.classes.container}> 
                         <TextField
                             className={this.props.classes.input}
                             multiline

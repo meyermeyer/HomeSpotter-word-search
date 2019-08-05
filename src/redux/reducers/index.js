@@ -8,7 +8,8 @@ import { combineReducers } from 'redux';
 // This is what we get when we use 'state' inside of 'mapStateToProps'
 const wordsReducer = (state = [], action) => {
     if (action.type === 'STORE_WORDS') {
-        return action.payload
+        //sort alphabetically
+        return action.payload.sort()
     }
     else {
         return state;

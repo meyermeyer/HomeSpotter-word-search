@@ -25,12 +25,21 @@ let removeShortWords = (words)=>{
             for(let i=0; i<otherWord.length; i++){
                 //if other word is longer, if other word contains first letter of 'word, 
                 //and if word length is less than remaining letters in string, check for matches
-                if (otherWord.length > word.length && otherWord[i] === word[0] && word.length <= otherWord.length - i+1) {
+                if (otherWord.length > word.length && otherWord[i] === word[0] && word.length <= otherWord.length - i ) {
                     //if substring starting at matching letter of length same length as 'word' is word, 
                     //remove from array
                     console.log('potential match', word, otherWord, otherWord[i]);
                     if (otherWord.substring(i, i + word.length) === word) {
-                        reducedWordList.splice(j,1)
+                        // console.log('substring', otherWord.substring(i, i + word.length));
+                        let index = reducedWordList.indexOf(word)
+                        //prevent instance where word is contained in more than one of the other words don't try to remove the same word twice
+                        if (index>-1){
+                            reducedWordList.splice(index, 1)
+                            console.log('match removed', index, word, reducedWordList, reducedWordList.length);
+                        }
+                    }
+                    else {
+                        console.log('no match', word, otherWord.substring(i, i + word.length));
                     }
                 }            
             }
@@ -62,11 +71,13 @@ router.post('/', (req,res)=>{
 router.get('/all', (req,res)=>{
     console.log('in GET /', foundWords);
     res.send(foundWords)
+    foundWords = []
 })
 
 router.get('/reduced', (req,res)=>{
     console.log('in GET /reduced');
     res.send(reducedWordList)
+    reducedWordList = []
     
 })
 
